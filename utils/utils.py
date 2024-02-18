@@ -16,4 +16,25 @@ def create_database(name_db):
     conn.close()
 
 
-create_database('my_new_DB')
+def create_tables(name_db):
+    """ Функция для создания таблиц в базе данных. """
+
+    conn = psycopg2.connect(dbname='postgres', **config())
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute('CREATE TABLE employers'
+                        '('
+                        'employer_id  int PRIMARY KEY,'
+                        'employer_name varchar(255) UNIQUE NOT NULL,'
+                        'open_vacancies int)')
+
+            cur.execute('CREATE TABLE vacancies'
+                        '('
+                        'employer_id int PRIMARY KEY,'
+                        'employer_name varchar(255) UNIQUE NOT NULL,'
+                        'area varchar(255),'
+                        'salary_from int,'
+                        'salary_to int,'
+                        'url varchar(255),'
+                        'employer int REFERENCES employers(employer_id) NOT NULL)')
+
