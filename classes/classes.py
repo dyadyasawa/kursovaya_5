@@ -41,9 +41,9 @@ class HeadHunterApi:
     def choise_data_for_vacancies(self) -> list:
         """ Метод для выборки данных из вакансии. """
 
-        data = self.choise_data_for_employers()
-        data_list = []
-        for item in data:
+        data_list_employers = self.choise_data_for_employers()
+        data_list_vacancies = []
+        for item in data_list_employers:
             vacancies = self.get_vacancies_info(item['employer_id'])
 
             for item in vacancies:
@@ -54,10 +54,10 @@ class HeadHunterApi:
                     salary_from = item['salary']['from'] if item['salary']['from'] else 0
                     salary_to = item['salary']['to'] if item['salary']['to'] else 0
 
-                data_list.append({'employer_id': item['employer']['id'],
+                data_list_vacancies.append({'employer_id': item['employer']['id'],
                                   'employer_name': item['employer']['name'],
                                   'area': item['area']['name'],
                                   'url': item['alternate_url'],
                                   'salary_from': salary_from,
                                   'salary_to': salary_to})
-        return data_list
+        return data_list_employers, data_list_vacancies
