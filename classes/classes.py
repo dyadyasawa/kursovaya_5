@@ -55,9 +55,10 @@ class HeadHunterApi:
                     salary_to = item['salary']['to'] if item['salary']['to'] else 0
 
                 data_list_vacancies.append({'employer_id': item['employer']['id'],
-                                  'employer_name': item['employer']['name'],
-                                  'area': item['area']['name'],
-                                  'url': item['alternate_url'],
-                                  'salary_from': salary_from,
-                                  'salary_to': salary_to})
+                                            'employer_name': item['employer']['name'],
+                                            'area': item['area']['name'],
+                                            'salary_from': salary_from,
+                                            'salary_to': salary_to,
+                                            'url': item['alternate_url']})
+
         return data_list_employers, data_list_vacancies
