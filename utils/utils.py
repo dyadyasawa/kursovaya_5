@@ -36,9 +36,10 @@ def create_tables(name_db):
                 'area varchar(255),'
                 'salary_from int,'
                 'salary_to int,'
-                'url varchar(255)'
-                ')')
-                # 'employer int REFERENCES employers(employer_id) NOT NULL,'
+                'url varchar(255),'
+                'employer int'
+                ');'
+                'ALTER TABLE vacancies ADD CONSTRAINT fk_vacancies_employers FOREIGN KEY(employer_id) REFERENCES employers(employer_id);')
 
 
     cur.close()
