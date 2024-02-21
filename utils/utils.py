@@ -59,19 +59,19 @@ def add_data_to_tables(name_db):
 
     for employer in employers:
         cur.execute('INSERT INTO employers VALUES(%s, %s, %s),'
-                   f'{employer['employer_id']},'
-                   f'{employer['employer_name']},'
-                   f'{employer['vacancies']}')
+                    (employer['employer_id'],
+                    employer['employer_name'],
+                    employer['vacancies']))
 
     for vacancy in vacancies:
-        cur.execute('INSERT INTO vacancies VALUES(%s, %s, %s, %s, %s, %s),'
-                    f'{vacancy['employer_id']},'
-                    f'{vacancy['employer_name']},'
-                    f'{vacancy['area']},'
-                    f'{vacancy['salary_from']},'
-                    f'{vacancy['salary_to']},'
-                    f'{vacancy['url']},'
-                    f'{vacancy['employer']}')
+        cur.execute('INSERT INTO vacancies VALUES(%s, %s, %s, %s, %s, %s, %s),'
+                    (vacancy['employer_id'],
+                    vacancy['employer_name'],
+                    vacancy['area'],
+                    vacancy['salary_from'],
+                    vacancy['salary_to'],
+                    vacancy['url'],
+                    vacancy['employer']))
 
     cur.close()
     conn.close()
