@@ -54,7 +54,7 @@ def add_data_to_tables(name_db):
     employers = hh.choise_data_for_vacancies()[0]
     vacancies = hh.choise_data_for_vacancies()[1]
 
-    conn = psycopg2.connect(dbname=name_db, **config())
+    conn = psycopg2.connect(database=name_db, **config())
     conn.autocommit = True
     cur = conn.cursor()
 
