@@ -58,13 +58,13 @@ def add_data_to_tables(name_db):
     cur = conn.cursor()
 
     for employer in employers:
-        cur.execute('INSERT INTO employers VALUES(%s, %s, %s),'
+        cur.execute('INSERT INTO employers VALUES (%s, %s, %s)',
                     (employer['employer_id'],
                     employer['employer_name'],
                     employer['vacancies']))
 
     for vacancy in vacancies:
-        cur.execute('INSERT INTO vacancies VALUES(%s, %s, %s, %s, %s, %s, %s),'
+        cur.execute('INSERT INTO vacancies VALUES (%s, %s, %s, %s, %s, %s, %s)',
                     (vacancy['employer_id'],
                     vacancy['employer_name'],
                     vacancy['area'],
