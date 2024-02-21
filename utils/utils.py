@@ -7,7 +7,7 @@ from classes.classes import HeadHunterApi
 def create_database(name_db):
     """ Функция для создания базы данных. """
 
-    conn = psycopg2.connect(dbname='postgres', **config())
+    conn = psycopg2.connect(database='postgres', **config())
     conn.autocommit = True
     cur = conn.cursor()
     cur.execute(f'DROP DATABASE IF EXISTS {name_db}')
@@ -20,7 +20,7 @@ def create_database(name_db):
 def create_tables(name_db):
     """ Функция для создания таблиц в базе данных. """
 
-    conn = psycopg2.connect(dbname=name_db, **config())
+    conn = psycopg2.connect(database=name_db, **config())
     conn.autocommit = True
     cur = conn.cursor()
     cur.execute('CREATE TABLE employers'
@@ -33,7 +33,7 @@ def create_tables(name_db):
     cur.execute('CREATE TABLE vacancies'
                 '('
                 'employer_id int PRIMARY KEY,'
-                'employer_name varchar(255) UNIQUE NOT NULL,'
+                'vacancy_name varchar(255),'
                 'area varchar(255),'
                 'salary_from int,'
                 'salary_to int,'
