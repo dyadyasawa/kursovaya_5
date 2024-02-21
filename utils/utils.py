@@ -40,7 +40,8 @@ def create_tables(name_db):
                 'url varchar(255),'
                 'employer int'
                 ');'
-                'ALTER TABLE vacancies ADD CONSTRAINT fk_vacancies_employers FOREIGN KEY(employer_id) REFERENCES employers(employer_id);')
+                'ALTER TABLE vacancies ADD CONSTRAINT fk_vacancies_employers '
+                'FOREIGN KEY(employer_id) REFERENCES employers(employer_id);')
 
 
     cur.close()
