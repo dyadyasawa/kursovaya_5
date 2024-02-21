@@ -1,6 +1,7 @@
 
 import requests
 import random
+from pprint import pprint
 
 class HeadHunterApi:
     """ Класс для работы с данными через API сайта hh.ru. """
@@ -38,7 +39,7 @@ class HeadHunterApi:
         list_vacancies = requests.get(url, params=params).json()['items']
         return list_vacancies
 
-    def choise_data_for_vacancies(self) -> list:
+    def choise_data_for_vacancies(self) -> tuple:
         """ Метод для выборки данных из вакансии. """
 
         data_list_employers = self.choise_data_for_employers()
@@ -62,3 +63,7 @@ class HeadHunterApi:
                                             'url': item['alternate_url']})
 
         return data_list_employers, data_list_vacancies
+
+hh = HeadHunterApi()
+
+pprint(hh.choise_data_for_vacancies())
