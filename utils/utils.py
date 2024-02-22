@@ -16,6 +16,7 @@ def create_database(name_db):
     cur.close()
     conn.close()
 
+
 def create_tables(name_db):
     """ Функция для создания таблиц в базе данных. """
 
@@ -47,6 +48,7 @@ def create_tables(name_db):
     cur.close()
     conn.close()
 
+
 def add_data_to_tables(name_db):
     """ Функция добавляет информацию в таблицы базы данных. """
 
@@ -65,8 +67,8 @@ def add_data_to_tables(name_db):
                     VALUES (%s, %s, %s)
                     """,
                     (employer['employer_id'],
-                    employer['employer_name'],
-                    employer['vacancies']))
+                     employer['employer_name'],
+                     employer['vacancies']))
 
     for vacancy in vacancies:
         cur.execute("""
@@ -74,12 +76,12 @@ def add_data_to_tables(name_db):
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
                     """,
                     (vacancy['vacancy_id'],
-                    vacancy['employer_id'],
-                    vacancy['vacancy_name'],
-                    vacancy['area'],
-                    vacancy['salary_from'],
-                    vacancy['salary_to'],
-                    vacancy['url']))
+                     vacancy['employer_id'],
+                     vacancy['vacancy_name'],
+                     vacancy['area'],
+                     vacancy['salary_from'],
+                     vacancy['salary_to'],
+                     vacancy['url']))
 
     cur.close()
     conn.close()
