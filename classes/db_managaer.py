@@ -52,28 +52,39 @@ class DBManager:
         conn.close()
 
     def get_vacancies_with_higher_salary(self, name_db):
-        """ Метод получает список всех вакансий, у которых зарплата выше средней по всем вакансиям. """
+        """ Метод получает список всех вакансий, у которых зарплата выше средней по всем вакансиям
+            (используем колонку salary_from). """
 
         conn = psycopg2.connect(database=name_db, **config())
         cur = conn.cursor()
         cur.execute("""
-
+                    SELECT * FROM vacancies WHERE salary_from > (SELECT AVG(salary_from) FROM vacancies)
                     """)
+
+        for row in cur.fetchall():
+            print(f'Id вакансии: {row[0]}, id работодателя: {row[1]}, профессия: {row[2]}, место работы: {row[3]}, '
+                  f'зарплата от: {row[4]}, до: {row[5]}, url: {row[6]}')
+
         cur.close()
         conn.close()
 
-    def get_vacancies_with_keyword(self, name_db):
+    def get_vacancies_with_keyword(self, name_db, keyword):
         """ Метод получает список всех вакансий,
             в названии которых содержатся переданные в метод слова, например python. """
 
         conn = psycopg2.connect(database=name_db, **config())
         cur = conn.cursor()
-        cur.execute("""
+        cur.execute(
+                    f"SELECT * FROM vacancies WHERE vacancy_name LIKE '%{keyword.title()}%'"
+                    )
 
-                    """)
+        for row in cur.fetchall():
+            print(f'Id вакансии: {row[0]}, id работодателя: {row[1]}, профессия: {row[2]}, место работы: {row[3]}, '
+                  f'зарплата от: {row[4]}, до: {row[5]}, url: {row[6]}')
+
         cur.close()
         conn.close()
 
 
 db = DBManager()
-db.get_avg_salary('new_database')
+db.get_vacancies_with_keyword('new_database', 'летчик')
