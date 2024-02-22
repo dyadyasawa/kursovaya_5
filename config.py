@@ -2,7 +2,7 @@
 from configparser import ConfigParser
 
 
-def config(filename='../database.ini', section='postgresql'):
+def config(filename='database.ini', section='postgresql'):
     """ Функция для получения параметров подключения к базе данных из database.ini"""
 
     parser = ConfigParser()
