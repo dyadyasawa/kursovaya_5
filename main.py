@@ -1,7 +1,8 @@
 
-from classes.hh_api import HeadHunterApi
+from classes.db_managaer import DBManager
 from utils.utils import create_database, create_tables, add_data_to_tables
-from pprint import pprint
+
+db = DBManager()
 
 print()
 print('Приветствую, тебя, ув.Пользователь!')
@@ -20,18 +21,35 @@ print('... ... ну ... и, ... вот база данных и создана! 
 print()
 print('Теперь, можно, немного поработать с полученными данными.')
 print('Возможны следующие варианты:')
-print('  1 - вывести список всех компаний и количество открытых вакансий у каждой из них.')
-print('  2(уже интереснее) - вывести название компании, название вакансии(профессию), зарплату и ссылку на вакансию.')
-print('  3 - вывести среднюю зарплату по всем вакансиям.')
-print('  4 - вывести информацию о вакансиях, у которых зарплата выше средней(взятой по всем вакансиям)')
-print('  5 - вывести вакансии, в названии которых есть некое ключевое слово.')
-print('      (нужно будет ввести ключевое слово!, а если такового в названии вакансии не окажется -> пустая строка...)')
-print('  q - выход из программы.')
 
-# answer = input()
+while True:
+    print('  1 - вывести список всех компаний и количество открытых вакансий у каждой из них.')
+    print('  2(интереснее) - вывести название компании, название вакансии(профессию), зарплату и ссылку на вакансию.')
+    print('  3 - вывести среднюю зарплату по всем вакансиям.')
+    print('  4 - вывести информацию о вакансиях, у которых зарплата выше средней(взятой по всем вакансиям)')
+    print('  5 - вывести вакансии, в названии которых есть некое ключевое слово.')
+    print('      (введи ключевое слово!, а если такового в названии вакансии не окажется -> пустая строка...)')
+    print('  q - выход из программы.')
 
+    answer = input()
 
-
-# hh = HeadHunterApi()
-#
-# pprint(hh.choise_data_for_vacancies())
+    if answer == 'q':
+        quit()
+    elif answer == '1':
+        db.get_companies_and_vacancies_count('new_database')
+        quit()
+    elif answer == '2':
+        db.get_all_vacancies('new_database')
+        quit()
+    elif answer == '3':
+        db.get_avg_salary('new_database')
+        quit()
+    elif answer == '4':
+        db.get_vacancies_with_higher_salary('new_database')
+        quit()
+    elif answer == '5':
+        keyword = input('Введи поисковое слово:  ')
+        db.get_vacancies_with_keyword('new_database', keyword)
+        quit()
+    else:
+        print('Наверное, ты, что-то ввел неправильно, попробуй еще раз, можно:')
