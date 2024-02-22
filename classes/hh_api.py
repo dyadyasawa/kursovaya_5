@@ -1,7 +1,6 @@
 
 import requests
 import random
-from pprint import pprint
 
 class HeadHunterApi:
     """ Класс для работы с данными через API сайта hh.ru. """
@@ -55,8 +54,9 @@ class HeadHunterApi:
                     salary_from = item['salary']['from'] if item['salary']['from'] else 0
                     salary_to = item['salary']['to'] if item['salary']['to'] else 0
 
-                data_list_vacancies.append({'employer_id': item['employer']['id'],
-                                            'employer_name': item['employer']['name'],
+                data_list_vacancies.append({'vacancy_id': item['id'],
+                                            'employer_id': item['employer']['id'],
+                                            'vacancy_name': item['name'],
                                             'area': item['area']['name'],
                                             'salary_from': salary_from,
                                             'salary_to': salary_to,
@@ -64,6 +64,5 @@ class HeadHunterApi:
 
         return data_list_employers, data_list_vacancies
 
-hh = HeadHunterApi()
 
-pprint(hh.choise_data_for_vacancies())
+
