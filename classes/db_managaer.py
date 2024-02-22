@@ -1,30 +1,79 @@
 
+import psycopg2
+from config import config
 class DBManager:
     """ Класс для подключения к БД Postgresql и работе с ее данными. """
 
-    def get_companies_and_vacancies_count(self):
+    def get_companies_and_vacancies_count(self, name_db):
         """ Метод получает список всех компаний и количество вакансий у каждой компании. """
 
-        pass
+        conn = psycopg2.connect(database=name_db, **config())
+        cur = conn.cursor()
+        cur.execute("""
+                    SELECT employer_name, open_vacancies FROM employers
+                    """)
 
-    def get_all_vacancies(self):
+        for row in cur.fetchall():
+            print(f'Компания: {row[0]}, открытых вакансий: {row[1]}')
+
+        cur.close()
+        conn.close()
+
+    def get_all_vacancies(self, name_db):
         """ Метод получает список всех вакансий с указанием названия компании,
             названия вакансии и зарплаты и ссылки на вакансию. """
 
-        pass
+        conn = psycopg2.connect(database=name_db, **config())
+        cur = conn.cursor()
+        cur.execute("""
+                    SELECT employers.employer_name, vacancy_name, salary_from, salary_to, url 
+                    FROM vacancies JOIN employers USING(employer_id)
+                    """)
 
-    def get_avg_salary(self):
-        """ Метод получает среднюю зарплату по вакансиям. """
+        for row in cur.fetchall():
+            print(f'Компания: {row[0]}, вакансия: {row[1]}, зарплата от: {row[2]} до: {row[3]}, url: {row[4]} ')
 
-        pass
+        cur.close()
+        conn.close()
 
-    def get_vacancies_with_higher_salary(self):
+    def get_avg_salary(self, name_db):
+        """ Метод получает среднюю зарплату по вакансиям(используем колонку salary_from). """
+
+        conn = psycopg2.connect(database=name_db, **config())
+        cur = conn.cursor()
+        cur.execute("""
+                    SELECT AVG(salary_from) FROM vacancies
+                    """)
+
+        for row in cur.fetchall():
+            print(f'Средняя зарплата по вакансиям: {round(row[0], 2)}')
+
+        cur.close()
+        conn.close()
+
+    def get_vacancies_with_higher_salary(self, name_db):
         """ Метод получает список всех вакансий, у которых зарплата выше средней по всем вакансиям. """
 
-        pass
+        conn = psycopg2.connect(database=name_db, **config())
+        cur = conn.cursor()
+        cur.execute("""
 
-    def get_vacancies_with_keyword(self):
+                    """)
+        cur.close()
+        conn.close()
+
+    def get_vacancies_with_keyword(self, name_db):
         """ Метод получает список всех вакансий,
             в названии которых содержатся переданные в метод слова, например python. """
 
-        pass
+        conn = psycopg2.connect(database=name_db, **config())
+        cur = conn.cursor()
+        cur.execute("""
+
+                    """)
+        cur.close()
+        conn.close()
+
+
+db = DBManager()
+db.get_avg_salary('new_database')
