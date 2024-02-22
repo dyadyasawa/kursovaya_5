@@ -2,6 +2,7 @@
 import requests
 import random
 
+
 class HeadHunterApi:
     """ Класс для работы с данными через API сайта hh.ru. """
 
@@ -43,8 +44,8 @@ class HeadHunterApi:
 
         data_list_employers = self.choise_data_for_employers()
         data_list_vacancies = []
-        for item in data_list_employers:
-            vacancies = self.get_vacancies_info(item['employer_id'])
+        for element in data_list_employers:
+            vacancies = self.get_vacancies_info(element['employer_id'])
 
             for item in vacancies:
                 if not item['salary']:
