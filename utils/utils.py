@@ -1,7 +1,7 @@
 
 import psycopg2
 from config import config
-from classes.classes import HeadHunterApi
+from classes.hh_api import HeadHunterApi
 
 
 def create_database(name_db):
@@ -83,7 +83,3 @@ def add_data_to_tables(name_db):
 
     cur.close()
     conn.close()
-
-create_database('new_database')
-create_tables('new_database')
-add_data_to_tables('new_database')

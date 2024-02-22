@@ -1,5 +1,5 @@
 
-from classes.classes import HeadHunterApi
+from classes.hh_api import HeadHunterApi
 from pprint import pprint
 
 hh = HeadHunterApi()
