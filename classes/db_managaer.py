@@ -84,7 +84,3 @@ class DBManager:
 
         cur.close()
         conn.close()
-
-
-db = DBManager()
-db.get_vacancies_with_keyword('new_database', 'летчик')
